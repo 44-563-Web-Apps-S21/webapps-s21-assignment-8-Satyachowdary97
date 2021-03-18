@@ -1,33 +1,49 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title> Fetchdemo Webpage</title>
-</head>
-<body>
-    <h1> Sai Satyanarayana Gullapalli computes</h1>
-    <div>  
-        <input type="number" name="A" id="A">
-        <input type="number" name="B" id="B">
-    </div>
-    <button onclick="remoteCompute()">Remote compute</button>
-    <div id="result">
+    <head>
+        <title> Fetch Demo Webpage</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <h1>Sai Satyanarayana Gullapalli computes</h1>
+        
+
+        <form>
+            <div class="form-group">
+            <label for="first_value"><h3>Type number</h3></label>
+            <input class="form-control" type ="number" id="first_value" name="first_value" > <br>
+            </div>
+            <div class="form-group">
+            <label for="second_value"><h3>Type number</h3></label>
+            <input class="form-control" type ="number" id="second_value" name="second_value" > <br>
+            </div>
+            <input type="button" class="btn btn-success" onclick="computeValues()" value="Remote compute">
+        </form>
+
+        <div id="result">Result will be obtained here</div>
+
         <script>
-            const remoteCompute=()=>{
-                let num1=document.getElementById("A").value
-                let num2=document.getElementById("B").value
-                let url=`http://127.0.0.1:3001?A=${num1}&B=${num2}`
-                fetch(url).then(
-                    (response)=>{
-                        console.log(response)
-                        return response.text();
-                    }
-                ).then((data)=>{
-                    console.log(data)
-                    document.getElementById("result").innerHTML=data
-                }).catch(err=>{
-                    document.getElementById("result").innerHTML=err
-                })
+           
+            function  computeValues(){
+            let x=document.getElementById("first_value").value
+           
+            let y=document.getElementById("second_value").value
+            console.log(x);
+            console.log(y);
+            let url=`http://127.0.0.1:3001?x=${x}&y=${y}`;
+            fetch(url).then(
+            (response)=>{
+            console.log(response)
+            return response.text()})
+            .then((data) => {document.getElementById("result").innerHTML=data})
+            .catch(err=>{document.getElementById("result").innerHTML=err})
             }
+
         </script>
-</body>
+    </body>
 </html>
