@@ -19,19 +19,17 @@ const server =
 
       if (req.method === 'GET' ) {
        
-          console.log("Look for query parameter data: " + search_params.get("x"))
-
-          let x=search_params.get("x")
-          let y=search_params.get("y")
-          let A=Math.log(x)
-          let B=Math.log(y)
-          
+          console.log("Look for query parameter x: " + search_params.get("x"))
+          console.log("Look for query parameter y: " + search_params.get("y"))
+          var valueOfX=search_params.get("x")
+          var valueOfY=search_params.get("y")
           // Process the queries here
           res.statusCode = 200      //code for OK
           res.setHeader('Content-Type', 'text/plain') 
-          res.write("My Math function is logarithm")
-          res.write(` logarithm of ${x} is ${A} `)
-          res.write(` logarithm of ${y} is ${B} `)
+          res.write(`The value of Math.log(${valueOfX}) is ${Math.log(valueOfX)} and Math.log(${valueOfY}) is ${Math.log(valueOfY)}`)
+         
+         
+          console.log(`Server running at http://${hostname}:${port}/`)
           res.end();
         
       } else {
